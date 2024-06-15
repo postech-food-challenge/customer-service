@@ -1,6 +1,7 @@
 package br.com.fiap.postech.configuration
 
 import br.com.fiap.postech.application.gateway.CustomerGateway
+import br.com.fiap.postech.application.usecase.IdentifyCustomerInteract
 import br.com.fiap.postech.application.usecase.RegisterCustomerInteract
 import br.com.fiap.postech.infrastructure.gateway.CustomerGatewayImpl
 import br.com.fiap.postech.infrastructure.persistence.CustomerFacade
@@ -19,4 +20,5 @@ val appModules = module {
     single<CustomerFacade> { CustomerFacadeImpl() }
     single<CustomerGateway> { CustomerGatewayImpl(get()) }
     single { RegisterCustomerInteract(get()) }
+    single { IdentifyCustomerInteract(get()) }
 }
