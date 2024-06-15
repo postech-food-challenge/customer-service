@@ -1,7 +1,7 @@
 package br.com.fiap.postech
 
-import br.com.fiap.postech.plugins.configureRouting
-import br.com.fiap.postech.plugins.configureSerialization
+import br.com.fiap.postech.configuration.configureRouting
+import br.com.fiap.postech.configuration.configureSerialization
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 
