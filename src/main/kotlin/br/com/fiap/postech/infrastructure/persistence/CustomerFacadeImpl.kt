@@ -16,7 +16,10 @@ class CustomerFacadeImpl : CustomerFacade {
             CustomerEntity(
                 cpf = row[Customers.cpf],
                 name = row[Customers.name],
-                email = row[Customers.email]
+                email = row[Customers.email],
+                cellphone =  row[Customers.cellphone],
+                address = row[Customers.address],
+                active = row[Customers.active]
             )
         }
     }
@@ -33,6 +36,9 @@ class CustomerFacadeImpl : CustomerFacade {
             it[cpf] = customer.cpf
             it[name] = customer.name
             it[email] = customer.email
+            it[cellphone] = customer.cellphone
+            it[address] = customer.address
+            it[active] = customer.active
         }
         customer
     } ?: throw DatabaseOperationException("Failed to insert product")

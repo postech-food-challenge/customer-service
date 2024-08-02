@@ -7,9 +7,12 @@ import kotlinx.serialization.Serializable
 data class CustomerResponse (
     val cpf: String,
     val name: String,
-    val email: String
+    val email: String,
+    val cellphone: String,
+    val address: String,
+    val active: Boolean
 ) {
     companion object {
-        fun fromDomain(domain: Customer) = CustomerResponse(domain.cpf.value, domain.name, domain.email)
+        fun fromDomain(domain: Customer) = CustomerResponse(domain.cpf.value, domain.name, domain.email, domain.cellphone, domain.address, domain.active)
     }
 }
