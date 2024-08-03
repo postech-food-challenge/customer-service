@@ -1,5 +1,6 @@
 package br.com.fiap.postech.infrastructure.controller
 
+import br.com.fiap.postech.application.usecase.DeactivateCustomerInteract
 import br.com.fiap.postech.application.usecase.IdentifyCustomerInteract
 import br.com.fiap.postech.application.usecase.RegisterCustomerInteract
 import br.com.fiap.postech.domain.entities.Customer
@@ -29,6 +30,16 @@ fun Route.identifyCustomerByCpfRoute() {
     get("/v1/customers/{cpf?}") {
         val cpfString = call.parameters["cpf"] ?: throw InvalidParameterException("Missing or malformed id")
         val product = identifyCustomerInteract.identify(cpfString).run { CustomerResponse.fromDomain(this) }
+        call.respond(product)
+    }
+}
+
+fun Route.deactivateCustomerByCpfRoute() {
+    val deactivateCustomerInteract: DeactivateCustomerInteract by inject()
+
+    post("/v1/customers/{cpf?}/deactivate") {
+        val cpfString = call.parameters["cpf"] ?: throw InvalidParameterException("Missing or malformed id")
+        val product = deactivateCustomerInteract.deactivate(cpfString).run { this }
         call.respond(product)
     }
 }

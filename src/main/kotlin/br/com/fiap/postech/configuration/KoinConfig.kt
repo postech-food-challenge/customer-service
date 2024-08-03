@@ -1,6 +1,7 @@
 package br.com.fiap.postech.configuration
 
 import br.com.fiap.postech.application.gateway.CustomerGateway
+import br.com.fiap.postech.application.usecase.DeactivateCustomerInteract
 import br.com.fiap.postech.application.usecase.IdentifyCustomerInteract
 import br.com.fiap.postech.application.usecase.RegisterCustomerInteract
 import br.com.fiap.postech.infrastructure.gateway.CustomerGatewayImpl
@@ -21,4 +22,6 @@ val appModules = module {
     single<CustomerGateway> { CustomerGatewayImpl(get()) }
     single { RegisterCustomerInteract(get()) }
     single { IdentifyCustomerInteract(get()) }
+    single { DeactivateCustomerInteract(get()) }
+
 }

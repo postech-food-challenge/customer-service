@@ -7,6 +7,8 @@ import br.com.fiap.postech.infrastructure.persistence.entity.Customers
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class CustomerFacadeImpl : CustomerFacade {
     private fun resultRowToProductEntity(row: ResultRow?): CustomerEntity? {
@@ -42,4 +44,13 @@ class CustomerFacadeImpl : CustomerFacade {
         }
         customer
     } ?: throw DatabaseOperationException("Failed to insert product")
+
+    override suspend fun deactivate(cpf: String): Boolean = dbQuery {
+        transaction {
+            val updatedRows = Customers.update({ Customers.cpf eq cpf }) {
+                it[active] = false
+            }
+            updatedRows == 1
+        }
+    } == true
 }

@@ -15,4 +15,8 @@ class CustomerGatewayImpl(private val facade: CustomerFacade) : CustomerGateway 
             return Customer.fromEntity(savedEntity)
         }
     }
+
+    override suspend fun deactivate(cpf: String): Boolean {
+        return facade.deactivate(cpf)
+    }
 }
