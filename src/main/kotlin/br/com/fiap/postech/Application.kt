@@ -14,4 +14,5 @@ fun Application.module() {
     configureKoin()
     configureSerialization()
     configureRouting()
+    configureExceptionsResponse()
 }

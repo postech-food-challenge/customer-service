@@ -44,7 +44,7 @@ class CustomerFacadeImpl : CustomerFacade {
 
     override suspend fun findByCpf(cpf: String): CustomerEntity? = dbQuery {
         Customers
-            .select { (Customers.cpf eq cpf) and (Customers.active eq true) }
+            .select { (Customers.cpf eq cpf) }
             .map(::resultRowToProductEntity)
             .singleOrNull()
     }
@@ -72,7 +72,7 @@ class CustomerFacadeImpl : CustomerFacade {
 
     override suspend fun deactivate(cpf: String): Boolean = dbQuery {
         transaction {
-            val updatedRows = Customers.update({ Customers.cpf eq cpf }) {
+            val updatedRows = Customers.update({ (Customers.cpf eq cpf) and (Customers.active eq true) }) {
                 it[active] = false
             }
             updatedRows == 1

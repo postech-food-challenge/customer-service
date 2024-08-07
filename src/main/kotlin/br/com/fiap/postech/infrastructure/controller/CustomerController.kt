@@ -39,7 +39,7 @@ fun Route.deactivateCustomerByCpfRoute() {
 
     post("/v1/customers/{cpf?}/deactivate") {
         val cpfString = call.parameters["cpf"] ?: throw InvalidParameterException("Missing or malformed id")
-        val product = deactivateCustomerInteract.deactivate(cpfString).run { this }
-        call.respond(product)
+        val response = deactivateCustomerInteract.deactivate(cpfString).run { this }
+        call.respond(response)
     }
 }
