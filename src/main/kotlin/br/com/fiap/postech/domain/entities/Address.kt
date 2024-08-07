@@ -1,5 +1,6 @@
 package br.com.fiap.postech.domain.entities
 
+import br.com.fiap.postech.configuration.CryptoSingleton
 import br.com.fiap.postech.infrastructure.controller.RegisterCustomerRequest
 import br.com.fiap.postech.infrastructure.persistence.entity.AddressEntity
 import kotlinx.serialization.Serializable
@@ -10,11 +11,11 @@ data class Address(val street: String, val city : String, val district  : String
         fun fromEntity(entityObject: AddressEntity?) =
             entityObject?.let {
                 Address(
-                    street = it.street,
+                    street = CryptoSingleton.decrypt(it.street),
                     city = it.city,
                     district = it.district,
-                    number = it.number,
-                    zipCode = it.zipCode
+                    number = CryptoSingleton.decrypt(it.number),
+                    zipCode = CryptoSingleton.decrypt(it.zipCode)
                 )
             }
 

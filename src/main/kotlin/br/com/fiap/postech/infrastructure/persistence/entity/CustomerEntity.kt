@@ -1,5 +1,6 @@
 package br.com.fiap.postech.infrastructure.persistence.entity
 
+import br.com.fiap.postech.configuration.CryptoSingleton
 import br.com.fiap.postech.domain.entities.Customer
 import org.jetbrains.exposed.dao.id.LongIdTable
 
@@ -16,7 +17,7 @@ data class CustomerEntity(
             return CustomerEntity(
                 cpf = domain.cpf.value,
                 name = domain.name,
-                email = domain.email,
+                email = CryptoSingleton.encrypt(domain.email),
                 cellphone = domain.cellphone,
                 address =  domain.address ?.let { AddressEntity.fromDomain(domain.address) },
                 active = domain.active
