@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.id.LongIdTable
 data class AddressEntity(
     val street : String,
     val city : String,
-    val district  : String,
+    val district : String,
     val number : String,
     val zipCode: String
 ) {
