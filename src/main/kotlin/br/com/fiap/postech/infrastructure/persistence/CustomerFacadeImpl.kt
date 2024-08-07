@@ -69,4 +69,13 @@ class CustomerFacadeImpl : CustomerFacade {
         }
         customer
     } ?: throw DatabaseOperationException("Failed to insert product")
+
+    override suspend fun deactivate(cpf: String): Boolean = dbQuery {
+        transaction {
+            val updatedRows = Customers.update({ Customers.cpf eq cpf }) {
+                it[active] = false
+            }
+            updatedRows == 1
+        }
+    } == true
 }
