@@ -31,6 +31,6 @@ object Customers : LongIdTable() {
     val email = varchar("email", 1024)
     val cellphone = varchar("cellphone", 1024)
     val active = bool("active")
-    val addressId = long("address_id").references(Addresses.id)
+    val addressId = long("address_id").references(Addresses.id).nullable()
 
 }

@@ -65,7 +65,7 @@ class CustomerFacadeImpl : CustomerFacade {
             it[email] = customer.email
             it[cellphone] = customer.cellphone
             it[active] = customer.active
-            it[addressId] = createdAddressId ?: 0L
+            it[addressId] = createdAddressId
         }
         customer
     } ?: throw DatabaseOperationException("Failed to insert product")
