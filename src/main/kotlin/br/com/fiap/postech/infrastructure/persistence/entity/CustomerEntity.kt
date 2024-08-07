@@ -8,7 +8,7 @@ data class CustomerEntity(
     val name: String,
     val email: String,
     val cellphone: String,
-    val address: String,
+    val address: AddressEntity?,
     val active: Boolean
 ) {
     companion object {
@@ -18,7 +18,7 @@ data class CustomerEntity(
                 name = domain.name,
                 email = domain.email,
                 cellphone = domain.cellphone,
-                address =  domain.address,
+                address =  domain.address ?.let { AddressEntity.fromDomain(domain.address) },
                 active = domain.active
             )
         }
@@ -30,7 +30,7 @@ object Customers : LongIdTable() {
     val name = varchar("name", 50)
     val email = varchar("email", 1024)
     val cellphone = varchar("cellphone", 1024)
-    val address = varchar("address", 1024)
     val active = bool("active")
+    val addressId = long("address_id").references(Addresses.id)
 
 }

@@ -1,5 +1,6 @@
 package br.com.fiap.postech.configuration
 
+import br.com.fiap.postech.infrastructure.persistence.entity.Addresses
 import br.com.fiap.postech.infrastructure.persistence.entity.Customers
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -45,6 +46,7 @@ object DatabaseSingleton {
                 Database.connect(dataSource)
                 transaction {
                     SchemaUtils.create(Customers)
+                    SchemaUtils.create(Addresses)
                 }
                 logger.info("Database connection and migration successful.")
                 connected = true
