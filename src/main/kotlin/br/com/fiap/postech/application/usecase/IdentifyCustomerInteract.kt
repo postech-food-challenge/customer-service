@@ -16,6 +16,5 @@ class IdentifyCustomerInteract(private val gateway: CustomerGateway) {
             if (!customer.active)
                 throw CustomerNotActiveException(cpf.value)
         return customer;
-//        return gateway.findByCpf(cpf.value) ?: throw CustomerNotFoundException(cpf.value)
     }
 }
