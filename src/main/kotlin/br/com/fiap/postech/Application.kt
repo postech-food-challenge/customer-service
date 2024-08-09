@@ -1,9 +1,6 @@
 package br.com.fiap.postech
 
-import br.com.fiap.postech.configuration.DatabaseSingleton
-import br.com.fiap.postech.configuration.configureKoin
-import br.com.fiap.postech.configuration.configureRouting
-import br.com.fiap.postech.configuration.configureSerialization
+import br.com.fiap.postech.configuration.*
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 
@@ -13,7 +10,9 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     DatabaseSingleton.init(environment.config, log)
+    CryptoSingleton.init(environment.config)
     configureKoin()
     configureSerialization()
     configureRouting()
+    configureExceptionsResponse()
 }
